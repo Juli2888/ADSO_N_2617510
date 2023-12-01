@@ -1,0 +1,30 @@
+Proceso Datos_personales
+	Definir nombre Como Caracter;
+    Definir sexo Como Caracter;
+    Definir edad Como Entero;
+    Definir salario Como Real;
+    Definir tiene_vehiculo Como Caracter;
+    
+    Escribir "Ingrese su nombre:";
+    Leer nombre;
+    
+    Escribir "Ingrese su sexo (M/F):";
+    Leer sexo;
+    
+    Escribir "Ingrese su edad:";
+    Leer edad;
+    
+    Escribir "Ingrese su salario:";
+    Leer salario;
+    
+    Escribir "¿Tiene vehículo de transporte? (S/N):";
+    Leer tiene_vehiculo;
+    
+    Escribir "Datos personales:";
+    Escribir "Nombre: ", nombre;
+    Escribir "Sexo: ", sexo;
+    Escribir "Edad: ", edad, " años";
+    Escribir "Salario: $", salario;
+    Escribir "Tiene vehículo de transporte: ", tiene_vehiculo;
+    
+FinProceso

@@ -1,0 +1,20 @@
+Algoritmo Fibonacci
+	
+	Definir cantidad, i, a, b, c Como Entero;
+	
+	Escribir "Ingrese la cantidad de números que desea ver de la serie de Fibonacci:";
+	Leer cantidad;
+	
+	a <- 0;
+	b <- 1;
+	i <- 1;
+	
+	Mientras i <= cantidad Hacer
+		Escribir a;
+		c <- a + b;
+		a <- b;
+		b <- c;
+		i <- i + 1;
+	FinMientras
+	
+FinAlgoritmo

@@ -1,0 +1,12 @@
+Algoritmo MultiplicarNumeros
+	
+	definir numeroA Como Real;
+	definir numeroB Como Real;
+	definir producto Como Real;
+	Escribir "Ingrese el número A:";
+	Leer numeroA;
+	Escribir "Ingrese el número B:";
+	Leer numeroB;
+	producto = numeroA * numeroB;
+	Escribir "El producto del número A por el número B es:", producto;
+FinAlgoritmo

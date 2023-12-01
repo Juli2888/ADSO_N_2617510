@@ -1,0 +1,28 @@
+Algoritmo CompraDeArticulos
+	
+    // Solicitar al usuario los datos del artículo
+    Escribir "Ingrese el nombre del artículo:";
+    Leer nombreArticulo;
+    
+    Escribir "Ingrese el valor de unidad del artículo:";
+    Leer valorUnidad;
+    
+    Escribir "Ingrese la cantidad a llevar:";
+    Leer cantidad;
+    
+    Escribir "El artículo es de la canasta familiar? (S/N)";
+    Leer esCanastaFamiliar;
+    
+    // Calcular el total del valor de los productos a llevar
+    total = valorUnidad * cantidad;
+    
+    Si esCanastaFamiliar = "N" Entonces
+        // Sumar el IVA 19% si no es de la canasta familiar
+        iva = total * 0.19;
+        total = total + iva;
+    FinSi
+    
+    // Mostrar el total a pagar al usuario
+    Escribir "El total a pagar es:", total;
+    
+FinAlgoritmo

@@ -1,0 +1,12 @@
+Algoritmo restaNumeros
+	
+	definir numeroA Como Real;
+	definir numeroB Como Real;
+	definir resta Como Real;
+	Escribir "Ingrese el número A:";
+	Leer numeroA;
+	Escribir "Ingrese el número B:";
+	Leer numeroB;
+	resta = numeroA - numeroB;
+	Escribir "La diferencia del número A con el número B es:", resta;
+FinAlgoritmo

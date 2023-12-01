@@ -1,0 +1,31 @@
+Algoritmo Dados
+    Definir num1, num2 Como Entero;
+    Escribir "Lanzando los dados...";
+    num1 <- Aleatorio(1,6);
+    num2 <- Aleatorio(1,6);
+    Escribir "El primer número es: ", num1;
+    Escribir "El segundo número es: ", num2;
+    Si num1 = num2 Y num1 Mod 2 = 0 Entonces
+        Escribir "Lanzar de nuevo...";
+        num1 <- Aleatorio(1,6);
+        num2 <- Aleatorio(1,6);
+        Escribir "El primer número es: ", num1;
+        Escribir "El segundo número es: ", num2;
+        Si num1 = num2 Y num1 Mod 2 = 0 Entonces;
+            Escribir "Lanzar de nuevo...";
+            num1 <- Aleatorio(1,6);
+            num2 <- Aleatorio(1,6);
+            Escribir "El primer número es: ", num1;
+            Escribir "El segundo número es: ", num2;
+            Si num1 = num2 Y num1 Mod 2 = 0 Entonces
+                Escribir "¡Saca una ficha!";
+            Sino
+                Escribir "¡Lanza de nuevo!";
+            FinSi
+        Sino
+            Escribir "¡Lanza de nuevo!";
+        FinSi
+    Sino
+        Escribir "¡Lanza de nuevo!";
+    FinSi
+FinAlgoritmo
