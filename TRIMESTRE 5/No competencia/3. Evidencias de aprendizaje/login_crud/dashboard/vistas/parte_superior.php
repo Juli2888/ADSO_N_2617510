@@ -47,7 +47,7 @@ if($_SESSION["s_usuario"] === null){
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-laugh-wink"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+        <div class="sidebar-brand-text mx-3">Admin <sup></sup></div>
       </a>
 
       <!-- Divider -->
@@ -72,13 +72,14 @@ if($_SESSION["s_usuario"] === null){
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
           <i class="fas fa-fw fa-cog"></i>
-          <span>Components</span>
+          <span>Modulos</span>
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Custom Components:</h6>
-            <a class="collapse-item" href="buttons.php">Buttons</a>
-            <a class="collapse-item" href="cards.php">Cards</a>
+            <h6 class="collapse-header">Disponibles:</h6>
+            <a class="collapse-item" href="productos.php">Productos</a>
+            <a class="collapse-item" href="inventario.php">Inventario</a>
+            <a class="collapse-item" href="facturas.php">Facturas</a>
           </div>
         </div>
       </li>

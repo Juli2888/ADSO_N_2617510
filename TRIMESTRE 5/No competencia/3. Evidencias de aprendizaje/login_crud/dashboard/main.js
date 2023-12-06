@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    tablaPersonas = $("#tablaPersonas").DataTable({
+    tablaClientes = $("#tablaClientes").DataTable({
        "columnDefs":[{
         "targets": -1,
         "data":null,
@@ -40,14 +40,14 @@ $(document).on("click", ".btnEditar", function(){
     fila = $(this).closest("tr");
     id = parseInt(fila.find('td:eq(0)').text());
     nombre = fila.find('td:eq(1)').text();
-    pais = fila.find('td:eq(2)').text();
-    edad = parseInt(fila.find('td:eq(3)').text());
+    contraseña = fila.find('td:eq(2)').text();
+    direccion = fila.find('td:eq(3)').text();
    correo = fila.find('td:eq(4)').text();
    movil = parseInt(fila.find('td:eq(5)').text());
     
     $("#nombre").val(nombre);
-    $("#pais").val(pais);
-    $("#edad").val(edad);
+    $("#contraseña").val(contraseña);
+    $("#direccion").val(direccion);
     $("#correo").val(correo);
     $("#movil").val(movil);
     opcion = 2; //editar
@@ -72,7 +72,7 @@ $(document).on("click", ".btnBorrar", function(){
             dataType: "json",
             data: {opcion:opcion, id:id},
             success: function(){
-                tablaPersonas.row(fila.parents('tr')).remove().draw();
+                tablaClientes.row(fila.parents('tr')).remove().draw();
             }
         });
     }   
@@ -81,25 +81,25 @@ $(document).on("click", ".btnBorrar", function(){
 $("#formPersonas").submit(function(e){
     e.preventDefault();    
     nombre = $.trim($("#nombre").val());
-    pais = $.trim($("#pais").val());
-    edad = $.trim($("#edad").val());
+    contraseña = $.trim($("#contraseña").val());
+    direccion = $.trim($("#direccion").val());
     correo = $.trim($("#correo").val()); 
     movil = $.trim($("#movil").val());     
     $.ajax({
         url: "bd/crud.php",
         type: "POST",
         dataType: "json",
-        data: {nombre:nombre, pais:pais, edad:edad, correo:correo, movil:movil, id:id, opcion:opcion},
+        data: {nombre:nombre, contraseña:contraseña, direccion:direccion, correo:correo, movil:movil, id:id, opcion:opcion},
         success: function(data){  
             console.log(data);
             id = data[0].id;            
             nombre = data[0].nombre;
-            pais = data[0].pais;
-            edad = data[0].edad;
+            contraseña = data[0].contraseña;
+            direccion = data[0].direccion;
             correo = data[0].correo;
             movil = data[0].movil; 
-            if(opcion == 1){tablaPersonas.row.add([id,nombre,pais,edad,correo,movil]).draw();}
-            else{tablaPersonas.row(fila).data([id,nombre,pais,edad,correo,movil]).draw();}            
+            if(opcion == 1){tablaClientes.row.add([id,nombre,contraseña,direccion,correo,movil]).draw();}
+            else{tablaClientes.row(fila).data([id,nombre,contraseña,direccion,correo,movil]).draw();}            
         }        
     });
     $("#modalCRUD").modal("hide");    

@@ -2,7 +2,7 @@
 
 <!--INICIO del cont principal-->
 <div class="container">
-    <h1>Contenido principal</h1>
+    <h1>Gestion de usuarios</h1>
     
     
     
@@ -11,7 +11,7 @@ include_once 'bd/conexion.php';
 $objeto = new Conexion();
 $conexion = $objeto->Conectar();
 
-$consulta = "SELECT id, nombre, pais, edad,correo,movil FROM personas";
+$consulta = "SELECT id, nombre, contraseña, direccion,correo,movil FROM clientes";
 $resultado = $conexion->prepare($consulta);
 $resultado->execute();
 $data=$resultado->fetchAll(PDO::FETCH_ASSOC);
@@ -30,13 +30,13 @@ $data=$resultado->fetchAll(PDO::FETCH_ASSOC);
         <div class="row">
                 <div class="col-lg-12">
                     <div class="table-responsive">        
-                        <table id="tablaPersonas" class="table table-striped table-bordered table-condensed" style="width:100%">
+                        <table id="tablaClientes" class="table table-striped table-bordered table-condensed" style="width:100%">
                         <thead class="text-center">
                             <tr>
                                 <th>Id</th>
                                 <th>Nombre</th>
-                                <th>País</th>                                
-                                <th>Edad</th>  
+                                <th>Contraseña</th>                                
+                                <th>Direccion</th>  
                                 <th>Correo</th>
                                 <th>Movil</th>
                                 <th>Acciones</th>
@@ -49,8 +49,8 @@ $data=$resultado->fetchAll(PDO::FETCH_ASSOC);
                             <tr>
                                 <td><?php echo $dat['id'] ?></td>
                                 <td><?php echo $dat['nombre'] ?></td>
-                                <td><?php echo $dat['pais'] ?></td>
-                                <td><?php echo $dat['edad'] ?></td>    
+                                <td><?php echo $dat['contraseña'] ?></td>
+                                <td><?php echo $dat['direccion'] ?></td>    
                                 <td><?php echo $dat['correo'] ?></td>  
                                 <td><?php echo $dat['movil'] ?></td>  
                                 <td></td>
@@ -81,12 +81,12 @@ $data=$resultado->fetchAll(PDO::FETCH_ASSOC);
                 <input type="text" class="form-control" id="nombre">
                 </div>
                 <div class="form-group">
-                <label for="pais" class="col-form-label">País:</label>
-                <input type="text" class="form-control" id="pais">
+                <label for="pais" class="col-form-label">Contraseña:</label>
+                <input type="password" class="form-control" id="contraseña">
                 </div>                
                 <div class="form-group">
-                <label for="edad" class="col-form-label">Edad:</label>
-                <input type="number" class="form-control" id="edad">
+                <label for="edad" class="col-form-label">direccion:</label>
+                <input type="text" class="form-control" id="direccion">
                 </div>         
                 <div class="form-group">
                 <label for="correo" class="col-form-label">corre:</label>

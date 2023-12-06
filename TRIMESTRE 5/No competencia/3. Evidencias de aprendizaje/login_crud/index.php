@@ -36,7 +36,10 @@
                     <div class="wrap-login-form-btn">
                         <div class="login-form-bgbtn"></div>
                         <button type="submit" name="submit" class="login-form-btn">CONECTAR</button>
+                        
                     </div>
+
+                    <p><a class="link" href="proyecto/index.html">Volver al incio</a></p>
                 </div>
             </form>
         </div>

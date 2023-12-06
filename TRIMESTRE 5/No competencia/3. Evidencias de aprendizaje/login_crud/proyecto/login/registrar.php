@@ -11,16 +11,17 @@
 </head>  
 <body>
 <?php
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $conexion = mysqli_connect("localhost", "root", "", "crud_2019") or die("Problemas con la conexión");
+    $conexion = mysqli_connect("localhost", "root", "", "faproltex") or die("Problemas con la conexión");
 
     // Utilizar consultas preparadas para evitar inyección de SQL
-    $query = "INSERT INTO personas (nombre, pais, edad, correo, movil) VALUES (?, ?, ?, ?, ?)";
+    $query = "INSERT INTO clientes (nombre, contraseña, direccion, correo, movil) VALUES (?, ?, ?, ?, ?)";
 
     $stmt = mysqli_prepare($conexion, $query);
-
+    $contraseñaEncriptada = password_hash($_POST['contraseña'], PASSWORD_DEFAULT);
     // Vincular parámetros
-    mysqli_stmt_bind_param($stmt, "ssisi", $_POST['nombre'], $_POST['pais'], $_POST['edad'], $_POST['correo'], $_POST['movil']);
+    mysqli_stmt_bind_param($stmt, "sssss", $_POST['nombre'], $contraseñaEncriptada, $_POST['direccion'], $_POST['correo'], $_POST['movil']);
 
     // Ejecutar la consulta
     if (mysqli_stmt_execute($stmt)) {
@@ -33,6 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     mysqli_close($conexion);
 }
 ?>
+
    
  <form class="formulario" action="" method="post">
     
@@ -47,12 +49,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
          
          <div class="input-contenedor">
          <i class="fas fa-envelope icon"></i>
-         <input type="text" name="pais" placeholder="pais" >
+         <input type="password" name="contraseña" placeholder="Ingrese su contraseña" >
          
          </div>
          <div class="input-contenedor">
             <i class="fas fa-envelope icon"></i>
-            <input type="text" name="edad" placeholder="edad" >
+            <input type="text" name="direccion" placeholder="direccion" >
             
             </div>         
          <div class="input-contenedor">
