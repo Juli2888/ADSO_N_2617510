@@ -11,14 +11,16 @@
 </head>  
 <body>
 <?php
-
+// Verificar si se ha enviado el formulario por POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+     // Conectar a la base de datos
     $conexion = mysqli_connect("localhost", "root", "", "faproltex") or die("Problemas con la conexión");
 
     // Utilizar consultas preparadas para evitar inyección de SQL
     $query = "INSERT INTO clientes (nombre, contraseña, direccion, correo, movil) VALUES (?, ?, ?, ?, ?)";
-
+    // Preparar la consulta
     $stmt = mysqli_prepare($conexion, $query);
+       // Encriptar la contraseña antes de almacenarla
     $contraseñaEncriptada = password_hash($_POST['contraseña'], PASSWORD_DEFAULT);
     // Vincular parámetros
     mysqli_stmt_bind_param($stmt, "sssss", $_POST['nombre'], $contraseñaEncriptada, $_POST['direccion'], $_POST['correo'], $_POST['movil']);
@@ -29,18 +31,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         echo "Error al registrar usuario: " . mysqli_error($conexion);
     }
-
+ // Cerrar la consulta y la conexión
     mysqli_stmt_close($stmt);
     mysqli_close($conexion);
 }
 ?>
 
-   
+   <!-- Formulario de registro -->
  <form class="formulario" action="" method="post">
     
     <h1>Registrate</h1>
      <div class="contenedor">
-     
+      <!-- Campos del formulario -->
      <div class="input-contenedor">
          <i class="fas fa-user icon"></i>
          <input type="text" name="nombre" placeholder="Nombre Completo" >
@@ -68,8 +70,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <i class="fas fa-envelope icon"></i>
                 <input type="text" name="movil" placeholder="Movil" >
             </div>
-                     
+                      <!-- Botón de registro -->
          <input type="submit" value="Registrate" class="button">
+           <!-- Mensajes y enlaces adicionales -->
          <p>Al registrarte, aceptas nuestras Condiciones de uso y Política de privacidad.</p>
          <p>¿Ya tienes una cuenta?<a class="link" href="loginvista.html">Iniciar Sesion</a></p>
          <p><a class="link" href="../index.html">Volver al incio</a></p>

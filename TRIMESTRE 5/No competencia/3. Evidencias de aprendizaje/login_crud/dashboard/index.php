@@ -1,3 +1,4 @@
+// Incluye la parte superior de la página
 <?php require_once "vistas/parte_superior.php"?>
 
 <!--INICIO del cont principal-->
@@ -7,10 +8,11 @@
     
     
  <?php
+  // Conecta a la base de datos
 include_once 'bd/conexion.php';
 $objeto = new Conexion();
 $conexion = $objeto->Conectar();
-
+// Consulta SQL para obtener los datos de clientes
 $consulta = "SELECT id, nombre, contraseña, direccion,correo,movil FROM clientes";
 $resultado = $conexion->prepare($consulta);
 $resultado->execute();
@@ -43,7 +45,8 @@ $data=$resultado->fetchAll(PDO::FETCH_ASSOC);
                             </tr>
                         </thead>
                         <tbody>
-                            <?php                            
+                            <?php      
+                            // Itera sobre los datos obtenidos y muestra en la tabla                      
                             foreach($data as $dat) {                                                        
                             ?>
                             <tr>
@@ -110,4 +113,5 @@ $data=$resultado->fetchAll(PDO::FETCH_ASSOC);
     
 </div>
 <!--FIN del cont principal-->
+// Incluye la parte inferior de la página
 <?php require_once "vistas/parte_inferior.php"?>
