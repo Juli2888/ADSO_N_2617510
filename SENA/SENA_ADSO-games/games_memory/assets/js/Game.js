@@ -1,55 +1,37 @@
 class Game {
-  constructor(contGameGame, level) {
-    // Asigna el elemento HTML con el id especificado al atributo contGame
+  constructor(contGameGame, level, prog, chor, speed, maxMilliseconds) {
     this.contGame = document.getElementById(contGameGame);
-    // Inicializa el atributo contCardGame sin asignarle ningún valor
     this.contCardGame;
-    // Obtiene el origen del servidor y lo asigna al atributo getServer
     this.getServer = window.location.origin;
-    // Nombre de la carpeta donde se encuentran los recursos del juego
     this.folderPath = "/games_memory";
-    // Ruta completa del servidor donde se encuentra el juego
     this.serverPath = this.getServer + this.folderPath;
-    // Ruta del archivo JSON que contiene los datos del juego
     this.uriJson = this.serverPath + "/assets/doc/User.json";
-    // Ruta de la carpeta donde se encuentran las imágenes del juego
     this.pathImg = this.serverPath + "/assets/img/memory/";
-    // Ruta de la imagen predeterminada del juego
     this.pathImgDafault = this.serverPath + "/assets/img/memory/img_default.png";
-    // Calcula el ancho de las cartas en función del nivel de dificultad
     this.longBootstrap = 12 / level;
-    // Arreglo para almacenar los datos del JSON
     this.newArrayGames = [];
-    // Arreglo para almacenar las cartas del juego
     this.arrayGamesCard = [];
-    // Obtiene los datos del JSON al iniciar el juego
     this.getDataJson();
-    // Nivel de dificultad del juego
     this.num = level;
-    // Valor máximo para generar números aleatorios
     this.max = 19;
-    // Valor mínimo para generar números aleatorios
     this.min = 0;
-    // Número máximo de cartas en el juego
     this.maxCard = (this.num * this.num) / 2;
-    // Arreglo para almacenar las cartas volteadas
     this.flippedCards = [];
-    // Variable para bloquear el tablero mientras se realiza la comparación de cartas
     this.lockBoard = false;
-    // Contador para las cartas coincidentes
-    this.matchedCards = 0;
+    this.matchedPairs = 0; // Nuevo atributo para contar los pares coincidentes encontrados
+    this.progressCont = document.getElementById(prog); // Elemento de la barra de progreso
+    this.chronometer = new Chronometer(chor, speed, maxMilliseconds); // Cronómetro
   }
 
-  // Método para obtener los datos del JSON mediante una solicitud fetch
   getDataJson() {
     fetch(this.uriJson)
       .then(response => response.json())
       .then(data => {
-        this.setElements(data); // Ejecuta el método setElements con los datos obtenidos del JSON
+        this.setElements(data);
+        this.chronometer.startChronometer(); // Inicia el cronómetro después de cargar los datos
       });
   }
 
-  // Método para generar un arreglo aleatorio de elementos
   getRandomArray(min, max, count) {
     let contentGame = [];
     let contentNum = [];
@@ -67,18 +49,16 @@ class Game {
     return this.setShuffleArray(this.arrayGamesCard);
   }
 
-  // Método para mezclar un arreglo aleatorio
   setShuffleArray(dataArrar) {
     return dataArrar.sort(() => Math.random() - 0.5);
   }
 
-  // Método para construir las cartas del juego y mostrarlas en el contenedor
   setElements(arraJson) {
     let cards = "";
     let cardsAux = "";
     let cont = 0;
     let row = this.num - 1;
-    this.contGame.innerHTML = ""; // Limpia el contenido del contenedor del juego
+    this.contGame.innerHTML = "";
     this.newArrayGames = arraJson;
     const getNewArray = this.getRandomArray(this.min, this.max, this.maxCard);
 
@@ -91,11 +71,10 @@ class Game {
         cardsAux = "";
       }
     }
-    this.contGame.innerHTML = cards; // Agrega las cartas al contenedor del juego
-    this.showFrontSide(); // Muestra la parte frontal de las cartas durante 10 segundos
+    this.contGame.innerHTML = cards;
+    this.showFrontSide();
   }
 
-  // Método para mostrar la parte frontal de las cartas
   showFrontSide() {
     this.contCardGame = document.querySelectorAll('.contCard');
     var pathDefault = this.pathImgDafault;
@@ -113,12 +92,11 @@ class Game {
         objImg.removeAttribute('data-flipped');
         cardTitle.style.visibility = 'hidden';
         cardText.style.visibility = 'hidden';
-        this.enableClick(); // Habilita la interacción del jugador después de mostrar la parte frontal durante 10 segundos
+        this.enableClick();
       }, 10000);
     }
   }
 
-  // Método para habilitar el clic en las cartas
   enableClick() {
     for (let i = 0; i < this.contCardGame.length; i++) {
       const objImg = this.contCardGame[i].querySelector('img');
@@ -133,14 +111,13 @@ class Game {
           cardText.style.visibility = 'visible';
           this.flippedCards.push(cardIndex);
           if (this.flippedCards.length === 2) {
-            this.checkForMatch(); // Verifica si hay una coincidencia entre las cartas volteadas
+            this.checkForMatch();
           }
         }
       });
     }
   }
 
-  // Método para verificar si las cartas volteadas coinciden
   checkForMatch() {
     const firstCard = this.flippedCards[0];
     const secondCard = this.flippedCards[1];
@@ -150,19 +127,17 @@ class Game {
     this.lockBoard = true;
 
     if (firstImg.dataset.src === secondImg.dataset.src) {
-      // Si las cartas son un par
-      this.matchedCards += 2;
+      this.matchedPairs++; // Incrementa el contador de pares coincidentes encontrados
       this.flippedCards = [];
 
-      if (this.matchedCards === this.maxCard) {
-        // Si todas las cartas se han emparejado
+      if (this.matchedPairs === this.maxCard / 2) { // Verifica si se han encontrado todos los pares posibles
         setTimeout(() => {
           alert("¡Has ganado!");
         }, 500);
       }
+      this.updateProgressBar(); // Actualiza la barra de progreso
       this.lockBoard = false;
     } else {
-      // Si las cartas no son un par
       setTimeout(() => {
         firstImg.src = pathDefault;
         firstImg.removeAttribute('data-flipped');
@@ -181,7 +156,13 @@ class Game {
       }, 1000);
     }
   }
+
+  updateProgressBar() {
+    const progressPercentage = (this.matchedPairs / (this.maxCard / 2)) * 100; // Calcula el porcentaje de pares coincidentes encontrados
+    this.progressCont.style.width = progressPercentage + "%";
+    this.progressCont.innerText = progressPercentage.toFixed(2) + "%";
+  }
 }
 
 // Uso del objeto Game
-const game = new Game("contGame", 4); // Crea un nuevo juego con un nivel de 4x4
+const game = new Game("contGame", 4, "progressBar", "chronometer", 1000, 60000);
