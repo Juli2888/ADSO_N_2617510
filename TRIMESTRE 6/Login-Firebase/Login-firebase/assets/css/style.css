@@ -1,0 +1,16 @@
+.container-form {
+  margin-top: 310px !important;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  background: rgba(227, 218, 218, 0.438);
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 1px rgb(1, 1, 1);
+}
+
+body {
+  background-image: url(../img/FONDO.jpg); /* Cambia 'ruta/a/tu/imagen.jpg' por la ruta de tu imagen de fondo */
+  background-size: cover; /* Ajusta la imagen para que cubra todo el fondo */
+  font-family: honk;
+  font-size: large;
+  text-transform: uppercase !important;
+}
+
