@@ -11,3 +11,16 @@ console.log(animales[7]);
 console.log (typeof animales);
 
 console.log (animales.length);
+
+
+
+let animes = ['demon','bleach','one pice'];
+
+
+console.log(animes[7]);
+
+animes[10] = 'dragon ball';
+
+console.log(typeof animes);
+
+console.log(animes.length);

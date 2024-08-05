@@ -21,3 +21,16 @@ personaje['llave'] =20;
 delete personaje.anime;
 
 console.log(personaje);
+
+let comida = {
+precio : 2000,
+cantidad : "20 kilos",
+categoria : "desayuno",
+
+};
+
+console.log (comida);
+
+comida.categoria = "almuerzo";
+
+delete comida.categoria;

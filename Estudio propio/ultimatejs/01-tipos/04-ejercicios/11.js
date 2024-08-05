@@ -1,3 +1,0 @@
-let sumaTotal = ;
-let sumaParcial =;
-
